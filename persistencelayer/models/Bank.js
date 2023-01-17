@@ -7,7 +7,7 @@ const BankSchema = new mongoose.Schema(
                  type: mongoose.Schema.Types.ObjectId, 
                  required: true
               },
-            bankName: string,
+            bankName: String,
             debit: Debt,
             totalDebitAmount: Number,
             accountValue: Number
