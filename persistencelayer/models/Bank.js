@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Debt = require('./Debt')
 
 const BankSchema = new mongoose.Schema(
   {
