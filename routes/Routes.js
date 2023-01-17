@@ -14,9 +14,9 @@ let UserController = require('../controllers/'+config.IUserController);
 
 let userController = new UserController();
 // ----- IMC ----
-let ImcController = require('../controllers/'+config.IImcController);
+let BankController = require('../controllers/'+config.IBankController);
 
-let imcController = new ImcController();
+let bankController = new BankController();
 
 
 
@@ -39,11 +39,11 @@ app.use(cors());
 
       app.get('/user/search', userController.index)
       // ---- IMC ----
-      app.get('/imc', imcController.show);
+      app.get('/bank', bankController.show);
 
-      app.get('/imc/search', imcController.index)
+      app.get('/bank/search', bankController.index)
 
-      app.get('/imc/searchbyuser/:iduser', imcController.indexbyUser)
+      app.get('/bank/searchbyuser/:iduser', bankController.indexbyUser)
       
 // lista user, filtrando por email
 // ex: /user/buscaemail/?email=vaguetti@gmail.com
@@ -53,7 +53,7 @@ app.use(cors());
     app.post('/user', userController.store);
 // lista user
     // ---- IMC -----
-    app.post('/imc', imcController.store);
+    app.post('/bank', bankController.store);
   }
 
   listen(){
