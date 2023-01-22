@@ -56,6 +56,11 @@ app.use(cors());
     app.post('/bank', bankController.store);
   }
 
+  delete() {
+    app.delete('/bank/:id', bankController.delete);
+     
+  }
+
   listen(){
     app.listen(3000, () => console.log('server started'));
      }

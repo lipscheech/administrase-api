@@ -1,19 +1,23 @@
 class IRoutes {
 
    constructor() {
-         
-    }
 
-  get(){
-    
-  }
-  post(){
-    
-  }
-  
-   listen(){
-     
    }
-  
+
+   get() {
+
+   }
+   post() {
+
+   }
+
+   delete() {
+
+   }
+
+   listen() {
+
+   }
+
 }
 module.exports = IRoutes;
