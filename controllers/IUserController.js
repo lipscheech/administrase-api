@@ -1,11 +1,12 @@
-class IUserController{
+class IUserController {
 
-   constructor(){}
-    index(){}
-    show(){}
-    store(){}
-    destroy(){}
-    update(){}
-    search(){}
+    constructor() { }
+    index() { }
+    show() { }
+    store() { }
+    destroy() { }
+    update() { }
+    search() { }
+    login() { }
 }
 module.exports = IUserController;

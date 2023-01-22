@@ -3,6 +3,7 @@ class IUserDAO {
     constructor() { }
     create() { }
     recovery() { }
+    login() { }
     update() { }
     delete() { }
     search() { }
