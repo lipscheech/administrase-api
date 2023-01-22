@@ -15,7 +15,6 @@ class UserDAO_Mongoose extends IUserDAO {
         });
     }
     async create(req, res) {
-
         const user = await User.create(req.body);
         if(!user.email || !user.password) {
             res.status(422).send("Você deve definir email e senha")

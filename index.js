@@ -3,4 +3,5 @@ let IRoutes = require('./routes/'+config.IRoutes);
 let userRoutes = new IRoutes();
     userRoutes.get();
     userRoutes.post();
+    userRoutes.delete();
     userRoutes.listen();
