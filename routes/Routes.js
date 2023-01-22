@@ -57,7 +57,7 @@ app.use(cors());
   }
 
   delete() {
-    app.delete('/bank/:id', bankController.delete);
+    app.delete('/bank/:id', bankController.destroy);
      
   }
 
