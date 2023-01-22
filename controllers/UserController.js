@@ -16,7 +16,7 @@ class UserController extends IUserController {
       return res.json(users);
    }
    async store(req, res) {
-      const user = await userdao.create(req);
+      const user = await userdao.create(req, res);
       return res.json(user);
    }
    async destroy(req, res) {
