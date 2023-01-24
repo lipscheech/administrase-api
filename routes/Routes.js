@@ -38,24 +38,24 @@ class Routes extends IRoutes {
         app.get('/user', userController.show);
 
         app.get('/user/search', userController.index)
-        
-        app.get('/bank', bankController.show);
 
-        app.get('/bank/search', bankController.index)
+        app.get('/bank', userController.autentication, bankController.show);
 
-        app.get('/bank/searchbyuser/:iduser', bankController.indexbyUser)
+        app.get('/bank/search', userController.autentication, bankController.index)
+
+        app.get('/bank/searchbyuser/:iduser', userController.autentication, bankController.indexbyUser)
 
     }
     post() {
         app.post('/user', userController.store);
 
-        app.post('/bank', bankController.store);
-        
+        app.post('/bank', userController.autentication, bankController.store);
+
         app.post('/login', userController.login)
     }
 
     delete() {
-        app.delete('/bank/:id', bankController.destroy);
+        app.delete('/bank/:id', userController.autentication, bankController.destroy);
 
     }
 

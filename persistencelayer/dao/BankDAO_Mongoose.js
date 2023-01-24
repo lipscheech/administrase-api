@@ -14,9 +14,16 @@ class BankDAO_Mongoose extends BankDAO {
             useUnifiedTopology: true
         });
     }
-    async create(req) {
-
-        const bank = await Bank.create(req.body);
+    async create(req, res) {
+        let newBank = req.body;
+        let { id } = req.user[0];
+        newBank._idUser = id;
+        console.log(newBank)
+        if (!newBank._idUser) {
+            res.status(404).send("Usuário sem Id");
+            return;
+        }
+        const bank = await Bank.create(newBank);
         return bank;
     }
     async recovery() {

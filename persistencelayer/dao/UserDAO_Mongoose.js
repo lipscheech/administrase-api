@@ -23,17 +23,20 @@ class UserDAO_Mongoose extends IUserDAO {
 
         if (!email || !password) {
             res.status(422).send("Você deve definir email e senha");
+            return
         } else if (findToBlock) {
             res.status(401).send("Usuário já cadastrado");
+            return
         } else {
             const salt = bcrypt.genSaltSync();
             const passwordEncript = bcrypt.hashSync(password, salt);
             const user = await User.create({
                 nome: nome,
                 email: email,
-                password: passwordEncript
+                password: passwordEncript,
             });
-            user.token = jwt.sign({ id:user._id }, "KEY_SECRET");
+            let token = jwt.sign({ id: user._id }, "KEY_SECRET");
+            user.updateOne({ $set: { token: token } }).exec();
             return user;
         }
 
@@ -43,15 +46,18 @@ class UserDAO_Mongoose extends IUserDAO {
         let { email, password } = req.body
         if (!email || !password) {
             res.status(422).send("Você deve definir email e senha");
+            return;
         }
         const user = await User.findOne({ email: email }).exec();
         if (!user) {
             res.status(401).send("email ou senha invalidos");
+            return;
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password)
         if (!passwordMatch) {
             res.status(401).send("email ou senha invalidos");
+            return;
         }
 
         return user
@@ -79,6 +85,28 @@ class UserDAO_Mongoose extends IUserDAO {
         );
         return users;
 
+    }
+
+    async autentication(req, res, next) {
+        const { authorization } = req.headers
+        if (!authorization) {
+            res.status(401).send("O usuário precisa estar logado");
+        }
+        const token = authorization.replace("Bearer ", "");
+        jwt.verify(token, "KEY_SECRET", async (err, payload) => {
+            if (err) {
+                res.status(401).send("O usuário precisa estar logado");
+                return;
+            }
+            const { id } = payload;
+            const user = await User.find({ _id: id });
+            if (!user) {
+                res.status(401).send("O usuário precisa estar logado");
+                return;
+            }
+            req.user = user
+            next();
+        })
     }
 
 

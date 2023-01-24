@@ -38,5 +38,9 @@ class UserController extends IUserController {
         return res.json(users);
     }
 
+    async autentication(req, res, next) {
+        let users = await userdao.autentication(req, res, next);
+    }
+
 }
 module.exports = UserController;

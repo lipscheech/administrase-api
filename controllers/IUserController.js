@@ -8,5 +8,6 @@ class IUserController {
     update() { }
     search() { }
     login() { }
+    autentication() {}
 }
 module.exports = IUserController;

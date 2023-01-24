@@ -7,5 +7,6 @@ class IUserDAO {
     update() { }
     delete() { }
     search() { }
+    autentication() { }
 }
 module.exports = IUserDAO;
